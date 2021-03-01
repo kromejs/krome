@@ -1,12 +1,12 @@
 {
-  "name": "crxx",
+  "name": "crx-esm",
   "version": "0.1.0",
-  "description": "Utils for chrome extension development",
+  "description": "Utils for chrome extension development as esm",
   "main": "index.js",
   "scripts": {
     "start": "snowpack build --watch",
     "build": "snowpack build",
-    "postbuild": "./scripts/publish.sh",
+    "publish": "./scripts/publish.sh",
     "clean": "rm -rf dist",
     "bump": "HUSKY_SKIP_HOOKS=1 release-it --ci",
     "lint": "tsc --noEmit && eslint './src/**/*.{ts,tsx,js,jsx}'",
