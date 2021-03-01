@@ -25,3 +25,6 @@ ${REPO_DIR}/README.md
 for file in "${FILES_TO_COPY[@]}"; do
   cp ${file} ${DIST_DIR}
 done
+
+cd ${DIST_DIR}
+npm publish
