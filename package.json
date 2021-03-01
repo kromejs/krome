@@ -6,6 +6,7 @@
   "scripts": {
     "start": "snowpack build --watch",
     "build": "snowpack build",
+    "postbuild": "./scripts/publish.sh",
     "clean": "rm -rf dist",
     "bump": "HUSKY_SKIP_HOOKS=1 release-it --ci",
     "lint": "tsc --noEmit && eslint './src/**/*.{ts,tsx,js,jsx}'",
