@@ -1,6 +1,6 @@
 # crx-esm
 ![Version](https://img.shields.io/github/package-json/v/hankchiutw/crx-esm?label=package.json)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hankchiutw/crx-esm/blob/main/LICENSE)
 
 > Utils for chrome extension development as esm
 

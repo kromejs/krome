@@ -18,6 +18,15 @@
   },
   "author": "hankchiutw",
   "license": "MIT",
+  "keywords": [
+    "chrome extension",
+    "esm",
+    "snowpack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hankchiutw/crx-esm"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
