@@ -16,6 +16,7 @@ usage() {
 REPO_DIR="$(cd $(dirname $0)/..; pwd)"
 DIST_DIR=${REPO_DIR}/dist
 
+# copy non-src files for publish
 FILES_TO_COPY=(
 ${REPO_DIR}/LICENSE
 ${REPO_DIR}/package.json
@@ -26,5 +27,9 @@ for file in "${FILES_TO_COPY[@]}"; do
   cp ${file} ${DIST_DIR}
 done
 
+# generate *.d.ts files
+yarn tsc --emitDeclarationOnly --outDir ${DIST_DIR}
+
+# publish to npm
 cd ${DIST_DIR}
 npm publish
