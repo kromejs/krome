@@ -18,6 +18,9 @@
   },
   "author": "hankchiutw",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@types/chrome": "^0.0.133",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
