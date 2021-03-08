@@ -1,6 +1,6 @@
 {
   "name": "crx-esm",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Utils as ES modules for chrome extension development",
   "main": "index.js",
   "scripts": {
