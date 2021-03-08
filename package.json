@@ -1,7 +1,7 @@
 {
   "name": "crx-esm",
   "version": "0.1.4",
-  "description": "Utils for chrome extension development as esm",
+  "description": "Utils as ES modules for chrome extension development",
   "main": "index.js",
   "scripts": {
     "start": "snowpack build --watch",

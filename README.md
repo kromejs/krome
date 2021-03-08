@@ -2,24 +2,83 @@
 ![Version](https://img.shields.io/github/package-json/v/hankchiutw/crx-esm?label=package.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hankchiutw/crx-esm/blob/main/LICENSE)
 
-> Utils for chrome extension development as esm
+> Utils as ES modules for chrome extension development
+
+##### Features
+- Hot reload for development installation.
+- Load content script programmatically.
+- Helper to convert chrome extension API(v2) to Promise-based.
 
 ## Install
 
 ```sh
-yarn install
+yarn add crx-esm
+```
+
+## Usage
+> background.js
+```js
+import { ScriptLoader, enableHotReload } from 'crx-esm';
+
+enableHotReload();
+
+const loader = new ScriptLoader();
+loader.contentScript = 'content.js';
+loader.injectOnClicked = true;
+loader.injectOnCommands = ['toggle-my-crx'];
+```
+
+> background.html
+```html
+<script type="module" src="background.js"></script>
+```
+
+> manifest.json
+```json
+"background": {
+  "page": "background.html",
+    "persistent": false
+},
+```
+
+See [examples](examples) for workable examples.
+
+## API
+- #### ScriptLoader
+> To load the content script programmatically.
+Sometimes we don't want to load the content script automatically for the matches.
+##### ScriptLoader.contentScript
+##### ScriptLoader.injectOnClicked
+##### ScriptLoader.injectOnCommands
+
+- #### enableHotReload
+> Hot reload your development installation(unpacked) without reinstall manually.
+
+Note: this will not take effect for production installation.
+
+```js
+import { enableHotReload } from 'crx-esm';
+enableHotReload();
+```
+
+- #### toPromise
+> Convert the legacy callback-based APIs to Promise-based.
+
+See this introductory article: [A simple technique to promisify Chrome extension API](https://dev.to/hankchiutw/a-simple-technique-to-promisify-chrome-extension-api-1e0c).
+```js
+import { toPromise } from 'crx-esm';
+toPromise(chrome.tabs.query)({}).then(() => {
+  // do something
+});
 ```
 
 ## Development
 
 ```sh
 yarn start
-```
-
-## Build
-
-```sh
 yarn build
+yarn bump
+yarn pub
 ```
 
 ## Author
