@@ -13,6 +13,7 @@
     "default_title": "Click or press Cmd/Ctrl+Shift+A to launch",
     "name": "Click or press Cmd/Ctrl+Shift+A to launch"
   },
+  "permissions": ["activeTab"],
   "commands": {
     "toggle-my-crx": {
       "suggested_key": {

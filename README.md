@@ -23,9 +23,6 @@ import { ScriptLoader, enableHotReload } from 'crx-esm';
 enableHotReload();
 
 const loader = new ScriptLoader();
-loader.contentScript = 'content.js';
-loader.injectOnClicked = true;
-loader.injectOnCommands = ['toggle-my-crx'];
 ```
 
 > background.html
@@ -37,8 +34,13 @@ loader.injectOnCommands = ['toggle-my-crx'];
 ```json
 "background": {
   "page": "background.html",
-    "persistent": false
+  "persistent": false
 },
+"browser_action": {
+  "default_title": "Click to launch",
+  "name": "Click to launch"
+},
+"permissions": ["activeTab"],
 ```
 
 See [examples](examples) for workable examples.
