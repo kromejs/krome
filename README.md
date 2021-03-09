@@ -46,10 +46,12 @@ See [examples](examples) for workable examples.
 ## API
 - #### ScriptLoader
 > To load the content script programmatically.
-Sometimes we don't want to load the content script automatically for the matches.
-##### ScriptLoader.contentScript
-##### ScriptLoader.injectOnClicked
-##### ScriptLoader.injectOnCommands
+
+Sometimes we don't want to load the content script automatically for the matches. You can use `ScriptLoader` to load content script from background script. Require `browser_action` or `commands` in `manifest.json`.
+ 
+##### ScriptLoader.contentScript (default: 'content.js')
+##### ScriptLoader.injectOnClicked (default: true)
+##### ScriptLoader.injectOnCommands (default: [])
 
 - #### enableHotReload
 > Hot reload your development installation(unpacked) without reinstall manually.

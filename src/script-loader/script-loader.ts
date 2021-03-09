@@ -2,8 +2,8 @@ import { toPromise } from '../utils';
 
 export class ScriptLoader {
   public injectOnCommands: string[] = [];
-  public injectOnClicked = false;
-  public contentScript: string;
+  public injectOnClicked = true;
+  public contentScript = 'content.js';
 
   private injectedTabMap = {};
 
