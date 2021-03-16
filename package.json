@@ -1,6 +1,6 @@
 {
   "name": "krome",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Modern chrome extension development with ESM",
   "main": "index.js",
   "scripts": {
