@@ -1,7 +1,7 @@
 {
-  "name": "crx-esm",
+  "name": "krome",
   "version": "0.1.6",
-  "description": "Utils as ES modules for chrome extension development",
+  "description": "Modern chrome extension development with ESM",
   "main": "index.js",
   "scripts": {
     "start": "snowpack build --watch",
@@ -25,7 +25,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/hankchiutw/crx-esm"
+    "url": "https://github.com/kromejs/krome"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

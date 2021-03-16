@@ -1,8 +1,8 @@
-# crx-esm
-![Version](https://img.shields.io/github/package-json/v/hankchiutw/crx-esm?label=package.json)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hankchiutw/crx-esm/blob/main/LICENSE)
+# krome
+![Version](https://img.shields.io/github/package-json/v/kromejs/krome?label=package.json)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kromejs/krome/blob/main/LICENSE)
 
-> Utils as ES modules for chrome extension development
+> Modern chrome extension development with ESM
 
 ##### Features
 - Hot reload for development installation.
@@ -12,13 +12,13 @@
 ## Install
 
 ```sh
-yarn add crx-esm
+yarn add krome
 ```
 
 ## Usage
 > background.js
 ```js
-import { ScriptLoader, enableHotReload } from 'crx-esm';
+import { ScriptLoader, enableHotReload } from 'krome';
 
 enableHotReload();
 
@@ -61,7 +61,7 @@ Sometimes we don't want to load the content script automatically for the matches
 Note: this will not take effect for production installation.
 
 ```js
-import { enableHotReload } from 'crx-esm';
+import { enableHotReload } from 'krome';
 enableHotReload();
 ```
 
@@ -70,7 +70,7 @@ enableHotReload();
 
 See this introductory article: [A simple technique to promisify Chrome extension API](https://dev.to/hankchiutw/a-simple-technique-to-promisify-chrome-extension-api-1e0c).
 ```js
-import { toPromise } from 'crx-esm';
+import { toPromise } from 'krome';
 toPromise(chrome.tabs.query)({}).then(() => {
   // do something
 });
@@ -84,15 +84,6 @@ yarn build
 yarn bump
 yarn pub
 ```
-
-## Author
-
-👤 **hankchiutw**
-
-* Website: https://hankchiu.tw
-* Twitter: [@hankchiutw](https://twitter.com/hankchiutw)
-* Github: [@hankchiutw](https://github.com/hankchiutw)
-* LinkedIn: [@hankchiutw](https://linkedin.com/in/hankchiutw)
 
 ## Show your support
 
