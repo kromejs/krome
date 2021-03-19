@@ -43,7 +43,7 @@ const loader = new ScriptLoader();
 "permissions": ["activeTab"],
 ```
 
-See [examples](examples) for workable examples.
+Recommand using [create-krome-app](https://www.npmjs.com/package/create-krome-app) to start your project.
 
 ## API
 - #### ScriptLoader
