@@ -6,7 +6,8 @@
   "scripts": {
     "start": "snowpack build --watch",
     "build": "snowpack build",
-    "pub": "./scripts/publish.sh",
+    "postbuild": "tsc --emitDeclarationOnly --outDir dist",
+    "pub": "yarn publish --cwd dist",
     "clean": "rm -rf dist",
     "bump": "HUSKY=0 release-it --ci",
     "lint": "tsc --noEmit && eslint './src/**/*.{ts,tsx,js,jsx}'",
