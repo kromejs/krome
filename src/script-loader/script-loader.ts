@@ -1,16 +1,9 @@
-import { toPromise } from '../utils';
+import { Krome } from '../krome';
 
-/**
- * @deprecated
- */
 export class ScriptLoader {
-  public injectOnCommands: string[] = [];
-  public injectOnClicked = true;
-  public contentScript = 'content.js';
-
   private injectedTabMap = {};
 
-  constructor() {
+  constructor(private krome: Krome) {
     this.handleTabUpdated();
     this.handleContentInjection();
   }
@@ -21,39 +14,46 @@ export class ScriptLoader {
   }
 
   /**
-   * Inject the {@link contentScript} into the {@link tabId}.
+   * Inject the {@link Krome.contentScript} into the {@link tabId}.
    */
   private async inject(tabId: number): Promise<void> {
     if (this.injectedTabMap[tabId]) {
       return;
     }
 
-    if (!this.contentScript || typeof this.contentScript !== 'string') {
-      throw new Error(`Not a valid content script: ${this.contentScript}`);
+    if (
+      !this.krome.contentScript ||
+      typeof this.krome.contentScript !== 'string'
+    ) {
+      throw new Error(
+        `Not a valid content script: ${this.krome.contentScript}`,
+      );
     }
 
-    return toPromise(chrome.tabs.executeScript)(tabId, {
-      file: this.contentScript,
-    }).then(() => {
-      this.injectedTabMap[tabId] = true;
-    });
+    return this.krome.tabs
+      .executeScript(tabId, {
+        file: this.krome.contentScript,
+      })
+      .then(() => {
+        this.injectedTabMap[tabId] = true;
+      });
   }
 
   /**
-   * Inject content script according to {@link injectOnClicked} and {@link injectOnCommands}.
+   * Inject content script according to {@link Krome.injectOnClicked} and {@link Krome.injectOnCommands}.
    */
   private handleContentInjection() {
     chrome.browserAction &&
       chrome.browserAction.onClicked.addListener(({ id }) => {
-        this.injectOnClicked && this.inject(id);
+        this.krome.injectOnClicked && this.inject(id);
       });
 
     chrome.commands &&
       chrome.commands.onCommand.addListener(async (command: string) => {
-        if (!Array.isArray(this.injectOnCommands)) {
+        if (!Array.isArray(this.krome.injectOnCommands)) {
           return;
         }
-        if (this.injectOnCommands.includes(command)) {
+        if (this.krome.injectOnCommands.includes(command)) {
           const tabId = await this.getActiveTabId();
           this.inject(tabId);
         }
@@ -61,7 +61,7 @@ export class ScriptLoader {
   }
 
   private async getActiveTabId(): Promise<number> {
-    const tabs = await toPromise(chrome.tabs.query)<chrome.tabs.Tab[]>({
+    const tabs = await this.krome.tabs.query<chrome.tabs.Tab[]>({
       active: true,
       currentWindow: true,
     });
