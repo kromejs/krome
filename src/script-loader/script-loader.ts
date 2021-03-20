@@ -29,7 +29,7 @@ export class ScriptLoader {
       throw new Error(`Not a valid content script: ${this.contentScript}`);
     }
 
-    return toPromise<void>(chrome.tabs.executeScript)(tabId, {
+    return toPromise(chrome.tabs.executeScript)(tabId, {
       file: this.contentScript,
     }).then(() => {
       this.injectedTabMap[tabId] = true;
@@ -58,7 +58,7 @@ export class ScriptLoader {
   }
 
   private async getActiveTabId(): Promise<number> {
-    const tabs = await toPromise<chrome.tabs.Tab[]>(chrome.tabs.query)({
+    const tabs = await toPromise(chrome.tabs.query)<chrome.tabs.Tab[]>({
       active: true,
       currentWindow: true,
     });

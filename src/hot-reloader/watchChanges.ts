@@ -2,15 +2,15 @@ import { toPromise } from '../utils';
 import { getAllEntries } from './getAllEntries';
 
 export async function watchChanges() {
-  const dir = await toPromise<DirectoryEntry>(
-    chrome.runtime.getPackageDirectoryEntry,
-  )();
+  const dir = await toPromise(chrome.runtime.getPackageDirectoryEntry)<
+    DirectoryEntry
+  >();
   const entries = await getAllEntries(dir);
 
   const modificationTimeMap: { [fullPath: string]: Date } = {};
   await Promise.all(
     entries.map(entry =>
-      toPromise<Metadata>(entry.getMetadata.bind(entry))().then(
+      toPromise(entry.getMetadata.bind(entry))<Metadata>().then(
         ({ modificationTime }) => {
           modificationTimeMap[entry.fullPath] = modificationTime;
         },
@@ -20,9 +20,9 @@ export async function watchChanges() {
 
   window.setInterval(() => {
     entries.forEach(async entry => {
-      const metadata = await toPromise<Metadata>(
-        entry.getMetadata.bind(entry),
-      )();
+      const metadata = await toPromise(entry.getMetadata.bind(entry))<
+        Metadata
+      >();
 
       if (
         modificationTimeMap[entry.fullPath].getTime() !==

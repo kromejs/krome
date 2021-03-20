@@ -26,12 +26,12 @@ export class MessageService {
       return Promise.resolve(null);
     }
 
-    const tabs = await toPromise<chrome.tabs.Tab[]>(chrome.tabs.query)({
+    const tabs = await toPromise(chrome.tabs.query)<chrome.tabs.Tab[]>({
       active: true,
       currentWindow: true,
     });
 
-    return toPromise<T>(chrome.tabs.sendMessage)(tabs[0].id, {
+    return toPromise(chrome.tabs.sendMessage)<T>(tabs[0].id, {
       eventName,
       detail,
     } as EventPayload);
@@ -41,7 +41,7 @@ export class MessageService {
    * Send message to runtime (background script).
    */
   public async send<T>(eventName: string, detail = {}): Promise<T> {
-    return toPromise<T>(chrome.runtime.sendMessage)({
+    return toPromise(chrome.runtime.sendMessage)<T>({
       eventName,
       detail,
     } as EventPayload);

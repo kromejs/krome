@@ -5,7 +5,7 @@ import { toPromise } from '../utils';
  */
 export async function getAllEntries(dir: DirectoryEntry) {
   const reader = dir.createReader();
-  const entries = await toPromise<Entry[]>(reader.readEntries.bind(reader))();
+  const entries = await toPromise(reader.readEntries.bind(reader))<Entry[]>();
   const result = [];
   while (entries[0]) {
     const entry = entries.shift();
