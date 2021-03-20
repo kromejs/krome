@@ -9,6 +9,9 @@ type EventCallback<T> = (detail: EventDetail) => T | Promise<T>;
 
 export type EventDetail = Record<string, unknown>;
 
+/**
+ * @deprecated
+ */
 export class MessageService {
   private eventMap: {
     [eventName: string]: EventCallback<unknown>;

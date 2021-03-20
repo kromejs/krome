@@ -11,8 +11,6 @@ const chromeProps = [
   'windows',
 ] as const;
 
-export type ChromeProps = {
-  [k in typeof chromeProps[number]]: {
-    [k: string]: PromiseCallback;
-  };
-};
+type propTypes = typeof chromeProps[number];
+export type ChromeMethod = Record<string, PromiseCallback>;
+export type ChromeProps = Record<propTypes, ChromeMethod>;

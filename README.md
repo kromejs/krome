@@ -5,9 +5,10 @@
 > Modern chrome extension development with ESM
 
 ##### Features
+- Transform all chrome extension APIs into Promise-style.
 - Hot reload for development installation.
 - Load content script programmatically.
-- Helper to convert chrome extension API(v2) to Promise-based.
+- Helper to convert callback-style function to Promise-style.
 
 ## Install
 
@@ -18,11 +19,9 @@ yarn add krome
 ## Usage
 > background.js
 ```js
-import { ScriptLoader, enableHotReload } from 'krome';
+import { enableHotReload } from 'krome';
 
 enableHotReload();
-
-const loader = new ScriptLoader();
 ```
 
 > background.html
@@ -46,14 +45,23 @@ const loader = new ScriptLoader();
 Recommand using [create-krome-app](https://www.npmjs.com/package/create-krome-app) to start your project.
 
 ## API
-- #### ScriptLoader
-> To load the content script programmatically.
+- #### Krome
+> A singleton object with promise-style chrome APIs and script loading feature.
 
-Sometimes we don't want to load the content script automatically for the matches. You can use `ScriptLoader` to load content script from background script. Require `browser_action` or `commands` in `manifest.json`.
- 
-##### ScriptLoader.contentScript (default: 'content.js')
-##### ScriptLoader.injectOnClicked (default: true)
-##### ScriptLoader.injectOnCommands (default: [])
+##### Promise version chrome APIs
+All `chrome.*.*` APIs are traversed and transformed programmatically by `toPromise`. Just repalce `chrome` with `krome` to use it, e.g.
+```js
+import { krome } from 'krome';
+krome.tabs.query<chrome.tabs.Tab[]>({}).then(() => {
+  // do something
+});
+```
+If you found some API not working correctly, please publish an issue.
+
+##### Krome.contentScript (default: 'content.js')
+##### Krome.injectOnClicked (default: true)
+Sometimes we don't want to load the content script automatically for the matches. Use this setting to load content script manually. Require `browser_action` or `commands` in `manifest.json`.
+##### Krome.injectOnCommands (default: [])
 
 - #### enableHotReload
 > Hot reload your development installation(unpacked) without reinstall manually.

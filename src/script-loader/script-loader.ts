@@ -1,5 +1,8 @@
 import { toPromise } from '../utils';
 
+/**
+ * @deprecated
+ */
 export class ScriptLoader {
   public injectOnCommands: string[] = [];
   public injectOnClicked = true;
