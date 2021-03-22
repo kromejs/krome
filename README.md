@@ -17,6 +17,7 @@ yarn add krome
 ```
 
 ## Usage
+Recommand using [create-krome-app](https://www.npmjs.com/package/create-krome-app) to start your project.
 > background.js
 ```js
 import 'krome';
@@ -38,15 +39,19 @@ import 'krome';
   "name": "Click to launch"
 },
 "permissions": ["activeTab"],
+"content_scripts": [
+  {
+    "matches": ["https://*/*"],
+    "js": ["content.js"]
+  }
+],
 ```
 
-Recommand using [create-krome-app](https://www.npmjs.com/package/create-krome-app) to start your project.
-
 ## API
-- #### Krome
-> A singleton object with promise-style chrome APIs and script loading feature.
+- #### krome
+> A singleton object with promise-style chrome extension APIs and script loading feature.
 
-##### Promise version chrome APIs
+##### Promise version chrome extension APIs
 All `chrome.*.*` APIs are traversed and transformed programmatically by `toPromise`. Just repalce `chrome` with `krome` to use it, e.g.
 ```js
 import { krome } from 'krome';
@@ -56,18 +61,19 @@ krome.tabs.query<chrome.tabs.Tab[]>({}).then(() => {
 ```
 If you found some API not working correctly, please publish an issue.
 
-##### Krome.contentScript (default: 'content.js')
-##### Krome.injectOnClicked (default: true)
+##### krome.contentScript (default: 'content.js')
+##### krome.injectOnClicked (default: true)
+##### krome.injectOnCommands (default: [])
 Sometimes we don't want to load the content script automatically for the matches. Use this setting to load content script manually. Require `browser_action` or `commands` in `manifest.json`.
-##### Krome.injectOnCommands (default: [])
 
-##### Krome.hotReload: Setter<boolean>
+##### krome.hotReload: Setter<boolean>
 > Setter to enable/disable hot reloader. Default enabled.
 
 Note: this will not take effect for production installation.
 
 ```js
 import { krome } from 'krome';
+// To disable hot reloader
 krome.hotReload = false;
 ```
 
@@ -86,8 +92,8 @@ toPromise(chrome.tabs.query)({}).then(() => {
 
 ```sh
 yarn start
-yarn build
 yarn bump
+yarn build
 yarn pub
 ```
 
