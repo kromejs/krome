@@ -6,7 +6,7 @@
 
 ##### Features
 - Transform all chrome extension APIs into Promise-style.
-- Hot reload for development installation.
+- Hot reloader for development installation.
 - Load content script programmatically.
 - Helper to convert callback-style function to Promise-style.
 
@@ -19,9 +19,7 @@ yarn add krome
 ## Usage
 > background.js
 ```js
-import { enableHotReload } from 'krome';
-
-enableHotReload();
+import 'krome';
 ```
 
 > background.html
@@ -63,14 +61,14 @@ If you found some API not working correctly, please publish an issue.
 Sometimes we don't want to load the content script automatically for the matches. Use this setting to load content script manually. Require `browser_action` or `commands` in `manifest.json`.
 ##### Krome.injectOnCommands (default: [])
 
-- #### enableHotReload
-> Hot reload your development installation(unpacked) without reinstall manually.
+##### Krome.hotReload: Setter<boolean>
+> Setter to enable/disable hot reloader. Default enabled.
 
 Note: this will not take effect for production installation.
 
 ```js
-import { enableHotReload } from 'krome';
-enableHotReload();
+import { krome } from 'krome';
+krome.hotReload = false;
 ```
 
 - #### toPromise

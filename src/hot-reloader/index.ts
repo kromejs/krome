@@ -1,1 +1,1 @@
-export * from './enableHotReload';
+export * from './hot-reloader';

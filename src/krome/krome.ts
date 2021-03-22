@@ -1,3 +1,4 @@
+import { HotReloader } from '../hot-reloader';
 import chromize from './chromize';
 import { ChromeProps } from './interfaces';
 
@@ -15,4 +16,13 @@ export class Krome {
   public injectOnCommands: string[] = [];
   public injectOnClicked = true;
   public contentScript = 'content.js';
+
+  constructor(private hotReloader?: HotReloader) {}
+
+  public set hotReload(value: boolean) {
+    if (!this.hotReloader) {
+      return;
+    }
+    value ? this.hotReloader.start() : this.hotReloader.stop();
+  }
 }

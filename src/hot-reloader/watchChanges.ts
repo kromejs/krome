@@ -1,7 +1,7 @@
 import { toPromise } from '../utils';
 import { getAllEntries } from './getAllEntries';
 
-export async function watchChanges() {
+export async function watchChanges(): Promise<number> {
   const dir = await toPromise(chrome.runtime.getPackageDirectoryEntry)<
     DirectoryEntry
   >();
@@ -18,7 +18,7 @@ export async function watchChanges() {
     ),
   );
 
-  window.setInterval(() => {
+  return window.setInterval(() => {
     entries.forEach(async entry => {
       const metadata = await toPromise(entry.getMetadata.bind(entry))<
         Metadata
